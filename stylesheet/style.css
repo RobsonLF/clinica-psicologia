@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=neurology');
+
+:root{
+
+    --color-primary:#e6c7c7;
+    --color-secondary:#eef3ef;
+    --color-bg:#fafafa;
+    --text-primary:#333333;
+    --text-secondary:#8a8987;
+    --icon-logo:#8a8987;
+    /*
+    --color-primary: #E6C7C7;
+    --color-secondary:#eef3ef;
+    --color-dark:#1a1a1a;
+    --color-light: #FDFBF6;
+    --text-light:#333333;
+    --text-dark:#EAE6E1;
+    --icon-logo: #a8c5d4;*/
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Inter", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);   
+    background-color:var(--color-bg);
+}
+#icone{
+    font-size: 32px;
+    color: var(--color-primary);
+}
+.navbar-brand {
+    font-size: 1.5rem;
+}
