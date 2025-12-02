@@ -58,6 +58,40 @@ body{
     color:var(--color-primary);
 }
 
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    padding: 8px 12px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(230, 199, 199, 0.25);
+}
+
+.navbar-collapse {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: max-height 0.6s ease-in-out, opacity 0.5s ease-in-out, padding 0.5s ease-in-out;
+    overflow: hidden;
+}
+
+/* Quando o menu está aberto, adiciona margin-top na classe main */
+.navbar-collapse.show ~ .hero,
+body:has(.navbar-collapse.show) .hero,
+body.menu-opening .hero {
+    margin-top: 120px;
+    transition: margin-top 0.15s ease-out;
+}
+
+/* Transição inicial do margin-top acontece primeiro */
+.hero {
+    transition: margin-top 0.15s ease-out;
+}
+
 .btn-cta {
     background-color: var(--color-primary);
     color: var(--color-dark);
@@ -216,6 +250,73 @@ body{
     width: 36px;
 }
 
+/* ##############################################  Footer Section ##########################################*/
+.footer {
+    background-color: #fafafa;
+    padding: 40px 0 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.footer-left {
+    flex: 1;
+}
+
+.footer-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.footer-crp {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.footer-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.social-icon {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon:hover {
+    color: var(--color-primary);
+}
+
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.footer-copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-copyright p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
 
 
 
@@ -280,6 +381,25 @@ body{
     }
     .about-image{
         margin-top: 40px;
+    }
+    
+    /* Footer responsivo */
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .footer-right {
+        gap: 15px;
+    }
+    
+    .footer-name {
+        font-size: 1.1rem;
+    }
+    
+    .footer-crp {
+        font-size: 0.85rem;
     }
 }
 
