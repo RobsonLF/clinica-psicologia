@@ -282,3 +282,14 @@ body{
         margin-top: 40px;
     }
 }
+
+/* Ajuste navbar: aproximar logo e texto em telas menores que 1000px */
+@media (max-width: 1000px) {
+    #icone{
+        padding-right: 4px;
+    }
+    .navbar-brand{
+        margin-left: 0;
+        font-size: 1.3rem;
+    }
+}
