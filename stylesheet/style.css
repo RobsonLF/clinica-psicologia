@@ -452,22 +452,13 @@ body:has(.navbar-collapse.show) main{
         margin-bottom: 30px;
     }
 
-
-    /*   
-    .card{
-        margin: 0 auto 15px auto;
-        max-width: 540px;
-        min-width: 380px;
-        width: 100%;
+    .gallery-container .image-card{
+        width: 315px;
+        margin-bottom: 30px;
     }
-    .specialization .row > div{
-        display: flex;
-        justify-content: center;
-    }*/
 }
 @media (max-width: 767px){
     .card{
-
         margin: 0 auto 15px auto;
         max-width: 540px;
         min-width: 380px;
@@ -477,11 +468,15 @@ body:has(.navbar-collapse.show) main{
         max-height: 230px;
         min-height: 230px;
     }
-        .gallery-container {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    .gallery-container .image-card{
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        max-width: 540px;
+        min-width: 516px;
+        margin-top: 24px;
     }
 }
-
 @media (max-width: 350px){
     .footer-right{
         display: none;
@@ -500,8 +495,6 @@ body:has(.navbar-collapse.show) main{
     }
 
 }
-
-
 @media (max-width: 576px) {
     .gallery-container {
         grid-template-columns: 1fr;
@@ -511,69 +504,3 @@ body:has(.navbar-collapse.show) main{
         height: 220px;
     }
 }
-/*
-Tablet
-@media (min-width:768px) and (max-width: 991px){
-    .container{
-
-    }
-    .navbar-brand{
-        margin-left:8px !important;
-    }
-}
-@media (max-width: 430px){
-    .navbar-brand{
-        
-    }
-}
-*/
-
-/* Responsivo 
-@media (max-width: 991px){
-    .photo-frame{
-        max-width: 420px;
-        height: clamp(260px, 45vh, 520px);
-    }
-    .photo-frame-about{
-        max-width: 420px;
-        height: clamp(260px, 45vh, 520px);
-    }
-    .hero-image{
-        justify-content: center;
-    }
-    .about-image{
-        justify-content: center;
-    }
-    .card{
-        max-width: 420px;
-        align-items: center;
-        margin: auto;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    .about-title{
-        font-size: 2rem;
-    }
-    .hero-content,
-    .hero-image {
-        padding: 0 20px;
-    }
-    .about-section, 
-    .about-image {
-        padding: 0 20px;
-    }
-
-
-    .hero-image {
-        margin-top: 40px;
-    }
-    .about-image{
-        margin-top: 40px;
-    }
-}*/
