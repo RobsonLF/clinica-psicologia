@@ -1,229 +1,522 @@
 <!DOCTYPE html>
-<html class="light" lang="pt-BR"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Dr. Ana Oliveira - Psicóloga</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-<script>
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#E6C7C7",
-                        "secondary": "#B2D8D8",
-                        "background-light": "#FDFBF6",
-                        "background-dark": "#1F1D1A",
-                        "text-light": "#333333",
-                        "text-dark": "#EAE6E1",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.5rem",
-                        "lg": "1rem",
-                        "xl": "1.5rem",
-                        "full": "9999px"
-                    },
-                },
-            },
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cards com Modal de Imagens</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
         }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24
+        
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 15px;
+        }
+        
+        .card-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+        
+        .card-img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card-img-wrapper:hover .card-img-overlay {
+            opacity: 1;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-body {
+            padding: 1.25rem;
+        }
+        
+        .card-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .card-text {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+            padding: 1.2rem 1.5rem;
+        }
+        
+        .modal-body {
+            padding: 0;
+            text-align: center;
+        }
+        
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .modal-footer {
+            border-top: none;
+            padding: 1rem 1.5rem;
+            background-color: #f8f9fa;
+        }
+        
+        .btn-zoom {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-zoom:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .image-info {
+            padding: 1rem 1.5rem;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        .image-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .image-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .instructions {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .instructions h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .modal-dialog {
+                margin: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .card-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
-<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-<div class="layout-container flex h-full grow flex-col">
-<div class="flex flex-1 justify-center py-5">
-<div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/50 px-6 sm:px-10 py-4 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm z-10">
-<div class="flex items-center gap-4">
-<div class="size-6 text-secondary">
-<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path></svg>
-</div>
-<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Dr. Ana Oliveira</h2>
-</div>
-<div class="hidden md:flex flex-1 justify-end gap-8">
-<div class="flex items-center gap-9">
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Início</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sobre Mim</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Serviços</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Contato</a>
-</div>
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary text-text-light text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
-<span class="truncate">Agende uma Consulta</span>
-</button>
-</div>
-<button class="md:hidden flex items-center justify-center rounded-lg p-2 hover:bg-primary/20 transition-colors">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</header>
-<main class="flex flex-col gap-12 sm:gap-16 md:gap-24">
-<section class="px-4 pt-10 @container">
-<div class="flex flex-col gap-6 @[480px]:gap-8 @[864px]:flex-row-reverse @[864px]:items-center">
-<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl @[480px]:h-auto @[480px]:min-w-[400px] @[864px]:w-full @[864px]:aspect-[4/5]" data-alt="Professional and welcoming portrait of Dr. Ana Oliveira" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBIWAlBxKHJAGiYasiHnM6zcbBlOblvz8DvNSZbC5IadZtxrgO7XiTUK1i9pfNM2LxZDU9NXZU0lDQFN7060rNjLvaHsspJ85doJnmSTsrqtzIk9drzaZQsHHGGiB0k6u1N9eNEtD5hIDXFZtO9jGRMz1__P5wEhe0dhy-mNwVgSyhdbl1UqFls9W8qMv5DetlhSEi09aFXLO44IVRylRRCRlfzT1ZAFZ8dGQcVISM_F9JhvQL-t-LsFZDIKmRFiyD7KxHCVI8Kp11u");'></div>
-<div class="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center">
-<div class="flex flex-col gap-3 text-left">
-<h1 class="text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">Psicologia para o seu bem-estar</h1>
-<h2 class="text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">Encontre um espaço seguro e acolhedor para cuidar da sua saúde mental. Sou Dr. Ana Oliveira, e estou aqui para te ajudar em sua jornada.</h2>
-</div>
-<button class="flex min-w-[84px] max-w-[480px] w-fit cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 @[480px]:h-12 @[480px]:px-8 bg-primary text-text-light text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:opacity-90 transition-opacity">
-<span class="truncate">Agende uma conversa</span>
-</button>
-</div>
-</div>
-</section>
-<section>
-<h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Sobre Mim</h2>
-<div class="p-4">
-<div class="flex flex-col md:flex-row items-stretch justify-between gap-6 rounded-xl">
-<div class="flex flex-[2_2_0px] flex-col gap-4">
-<div class="flex flex-col gap-2">
-<p class="text-lg font-bold leading-tight">Uma abordagem humana e empática</p>
-<p class="text-sm font-normal leading-relaxed text-text-light/80 dark:text-text-dark/80">Com especialização em terapia cognitivo-comportamental, minha missão é oferecer um ambiente de confiança e escuta ativa, onde você pode explorar suas emoções e desenvolver ferramentas para uma vida mais equilibrada e feliz. Acredito que cada indivíduo é único e, por isso, cada processo terapêutico é construído de forma colaborativa e personalizada.</p>
-</div>
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 flex-row bg-primary/20 dark:bg-primary/30 text-text-light dark:text-text-dark text-sm font-medium leading-normal w-fit hover:bg-primary/40 dark:hover:bg-primary/50 transition-colors">
-<span class="truncate">Saiba Mais</span>
-</button>
-</div>
-<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl flex-1" data-alt="Calm and serene office interior with a comfortable chair and plants" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6Hz3kh7MBbKCp6PpVzw9ATVI_EkGaUnwttc8o40D6lwIVB0wadX4gA5X5JOWhk1-MKIzwlnT_nQfOwqcR5cmHJvoRJjY8R406oaOvzB6i41l29CxA6TaEDSR3Bfa6fsLzZ7KitoLRcl2aqCjzAZzTncaGxkLM8tAnWRRXLUCTegHuC9-r-dEWcvQKtv8a7RKO4JPtE0ffpWm9y_U49nrWfTiR_mmtfUbtVCeC0rjZcBRm7Bekq_li1k9S3aYBUlneXip9OUJaNvxz");'></div>
-</div>
-</div>
-</section>
-<section>
-<h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Serviços e Especialidades</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-<div class="flex flex-col gap-4 rounded-xl p-6 bg-secondary/20 dark:bg-secondary/10">
-<span class="material-symbols-outlined text-secondary text-4xl">person</span>
-<div class="flex flex-col gap-1">
-<h3 class="font-bold">Terapia Individual</h3>
-<p class="text-sm text-text-light/80 dark:text-text-dark/80">Um espaço seguro para explorar seus pensamentos e emoções, focado no seu crescimento pessoal.</p>
-</div>
-</div>
-<div class="flex flex-col gap-4 rounded-xl p-6 bg-secondary/20 dark:bg-secondary/10">
-<span class="material-symbols-outlined text-secondary text-4xl">group</span>
-<h3 class="font-bold">Terapia de Casal</h3>
-<p class="text-sm text-text-light/80 dark:text-text-dark/80">Fortaleça a comunicação e a conexão em seu relacionamento com orientação profissional.</p>
-</div>
-<div class="flex flex-col gap-4 rounded-xl p-6 bg-secondary/20 dark:bg-secondary/10">
-<span class="material-symbols-outlined text-secondary text-4xl">psychology</span>
-<h3 class="font-bold">Ansiedade e Depressão</h3>
-<p class="text-sm text-text-light/80 dark:text-text-dark/80">Desenvolva estratégias eficazes para gerenciar a ansiedade e superar a depressão.</p>
-</div>
-</div>
-</section>
-<section>
-<h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Depoimentos de Pacientes</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-<div class="flex flex-col gap-4 rounded-xl p-6 bg-primary/20 dark:bg-primary/10">
-<div class="flex items-center gap-1 text-primary">
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-</div>
-<p class="text-sm italic leading-relaxed text-text-light/80 dark:text-text-dark/80">"A Dra. Ana me ajudou a ver as coisas de uma perspectiva diferente. Sua abordagem gentil e compreensiva foi fundamental no meu processo. Sou muito grato."</p>
-<div>
-<p class="font-bold text-sm">João S.</p>
-<p class="text-xs text-text-light/60 dark:text-text-dark/60">Paciente de Terapia Individual</p>
-</div>
-</div>
-<div class="flex flex-col gap-4 rounded-xl p-6 bg-primary/20 dark:bg-primary/10">
-<div class="flex items-center gap-1 text-primary">
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-</div>
-<p class="text-sm italic leading-relaxed text-text-light/80 dark:text-text-dark/80">"Encontrei na terapia um porto seguro. A Dra. Ana é uma profissional incrível, que me transmitiu muita confiança e me guiou com muita sabedoria."</p>
-<div>
-<p class="font-bold text-sm">Maria P.</p>
-<p class="text-xs text-text-light/60 dark:text-text-dark/60">Paciente de Terapia Individual</p>
-</div>
-</div>
-<div class="flex flex-col gap-4 rounded-xl p-6 bg-primary/20 dark:bg-primary/10">
-<div class="flex items-center gap-1 text-primary">
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-<span class="material-symbols-outlined !text-xl">star</span>
-</div>
-<p class="text-sm italic leading-relaxed text-text-light/80 dark:text-text-dark/80">"Nossas sessões de terapia de casal com a Dra. Ana foram transformadoras. Aprendemos a nos comunicar melhor e a resolver nossos conflitos de forma saudável."</p>
-<div>
-<p class="font-bold text-sm">Carlos e Lúcia</p>
-<p class="text-xs text-text-light/60 dark:text-text-dark/60">Pacientes de Terapia de Casal</p>
-</div>
-</div>
-</div>
-</section>
-<section class="px-4">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-<div class="aspect-square bg-cover bg-center rounded-xl" data-alt="A tranquil image of stacked stones on a beach" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfVSLn1l67fxjNVESdte85jU1DZIhu8qzc3Sz8L4vJnROwlzFIQiwg-mk2BAJl4cuOu-cbFELGqLytYv2Ngnm7H_4T_TsxUTZmuI6czdLxmcNV_1c1_F8hDLUSTGzu0nE8YD7Uc65q43HEB3M-MDwjJNja3KZ8H4kTgeHrxVG01mXCa544-ObMlIFijzr9kcNhWYUPF7Q9g04IfrvxRs7c8_OPGKinq40Ut4oY2eV6q9Xn4qe_v5Cng-hgPIJpVfDK6D5V9e7xXy5o')"></div>
-<div class="aspect-square bg-cover bg-center rounded-xl" data-alt="Close-up of a green leaf with water droplets" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmVau32WNxEfvGz2wwlqQI069dIUkDyWMjbJqg4zWiTTL9Zah7r3dg6Z6HaeUEnGBje2zBfAlL2Sm8TFkPVICJJDCgtyfDkq7Ln4Vf6TVwLpgOscfOkKSyXYxCwx7AjFMECMP4AZwOfMn35EOWkOMQNGsOEugKd77Ikho1FGldxgvpjNOKx3fUFuAYk3FpFNF-vT3S-z0Zi3u1hScKok9kDvhVfym2ZGmBjQo8tAmVpDO2RtucSXYz33FTBkqzdQfQsArULEvv-WSx')"></div>
-<div class="aspect-square bg-cover bg-center rounded-xl" data-alt="A serene view of a calm lake at sunrise" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChzXqI1eZInYdpQBUeHrIFRWOW1gAHpeEVAV3P_qQJziehcr_bhOo1X3TmnDuzIrpiEySB86fxc-w4_ptObgewQSlnWu9t1bnPEtlqOv4n_ne5af_sWmLhxPJwVSzB7kZ-e83xqmmrmYMJAO6KvGYTyN57_FIf4uQu3ljXlcEGuT0NB7xVm1UZTgzRkiwIDJP5vhiOPGNJGk1YQKR9VrzHkLJCGamEDK_VSoMsmekace21XBBDbCDTHllqEs_qe5hnTVxQFnOk8QSQ')"></div>
-<div class="aspect-square bg-cover bg-center rounded-xl" data-alt="Soft, textured fabric in a pastel color" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCRJofSBulVOC1fitmuKRcbgI4U9wh-AHWINzn9zrYqYfZ8UUbWUCgM59nKDrZWdu7d52-I1UoTLUOdSEezGBTilLUzqbipzxjGhS5MLNhL_8jKd0CRl3SH5YnbuqMGloq3wozaYg_NSsk3bZMII_KxvsdrddCM2Eqqk7YN2IJXz65C1ehlXceotUZaxSAnpH0USX0Ww9W8oozvNaamxHTem1y-ImOzCJMOhQJ3maFzQnCbzRb2pfFdvpaCu3v-WkhJxRfcrbDmonAV')"></div>
-</div>
-</section>
-<section class="px-4">
-<h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3 pt-5">Localização</h2>
-<div class="flex flex-col md:flex-row gap-6 md:gap-8 rounded-xl overflow-hidden bg-primary/20 dark:bg-primary/10">
-<div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-cover bg-center" data-location="São Paulo, Brazil" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhDFnp3fC3_-fdAvK9NxZgxjQQc9P-KIe4tadJHPagixPJFqMLYwMKTtB4qLKP_Z_ZA_c0BkJbn28GyFKfY7qcQ4zvX29kpZ2qUprHq0rXxbv5UZMY03HQh9jm2vpBJluwjuXmyybwkDRiX_awhjEvQWoWQPevImFHP1AKhuRGY62CVKr0uMwDgwnv824gB59YxDmv52880wy8wM-2gyEcdLRIWdJK2tyWwK80pUZiGFw8Y-3A8GfeJ5zpfUY_V_RPd3XRl-HLsvzX'); min-height: 300px;">
-</div>
-<div class="flex flex-col justify-center gap-4 p-6 md:p-8">
-<p class="text-lg font-bold">Venha me visitar</p>
-<div class="flex flex-col gap-2 text-sm text-text-light/80 dark:text-text-dark/80">
-<p>Av. Paulista, 1234 - Sala 56</p>
-<p>Bela Vista, São Paulo - SP</p>
-<p>CEP: 01310-100</p>
-<p class="pt-2 font-medium text-text-light dark:text-text-dark">Telefone: (11) 98765-4321</p>
-</div>
-<button class="flex mt-2 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 flex-row bg-primary text-text-light text-sm font-medium leading-normal w-fit hover:opacity-90 transition-opacity">
-<span class="truncate">Ver no mapa</span>
-</button>
-</div>
-</div>
-</section>
-</main>
-<footer class="mt-24 border-t border-primary/50 px-4 sm:px-10 py-8">
-<div class="flex flex-col sm:flex-row justify-between items-center gap-6">
-<div class="text-center sm:text-left">
-<p class="font-bold">Dr. Ana Oliveira</p>
-<p class="text-sm text-text-light/70 dark:text-text-dark/70">Psicóloga CRP 06/12345</p>
-</div>
-<div class="flex gap-4">
-<a class="p-2 rounded-full hover:bg-primary/20 transition-colors" data-alt="Instagram profile link" href="#">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
-</a>
-<a class="p-2 rounded-full hover:bg-primary/20 transition-colors" data-alt="LinkedIn profile link" href="#">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect height="12" width="4" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-</a>
-<a class="p-2 rounded-full hover:bg-primary/20 transition-colors" data-alt="WhatsApp contact link" href="#">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-</a>
-</div>
-</div>
-<div class="text-center text-xs text-text-light/60 dark:text-text-dark/60 mt-8">
-<p>© 2024 Dr. Ana Oliveira. Todos os direitos reservados.</p>
-</div>
-</footer>
-</div>
-</div>
-</div>
-</div>
-</body></html>
+<body>
+    <div class="container">
+        <header class="header text-center">
+            <h1><i class="fas fa-images me-2"></i>Galeria de Imagens Interativa</h1>
+            <p class="lead mb-0">Clique em qualquer imagem para visualizá-la em tamanho maior</p>
+        </header>
+        
+        <div class="card-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-img-wrapper" data-bs-toggle="modal" data-bs-target="#imageModal1">
+                    <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Paisagem de Montanhas">
+                    <div class="card-img-overlay">
+                        <h5 class="mb-1">Montanhas ao Amanhecer</h5>
+                        <p class="mb-0">Clique para expandir</p>
+                    </div>
+                    <div class="btn-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Montanhas ao Amanhecer</h5>
+                    <p class="card-text">Uma vista deslumbrante das montanhas durante o nascer do sol, com cores vibrantes pintando o céu.</p>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-img-wrapper" data-bs-toggle="modal" data-bs-target="#imageModal2">
+                    <img src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Floresta Tropical">
+                    <div class="card-img-overlay">
+                        <h5 class="mb-1">Floresta Tropical</h5>
+                        <p class="mb-0">Clique para expandir</p>
+                    </div>
+                    <div class="btn-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Floresta Tropical</h5>
+                    <p class="card-text">Uma densa floresta tropical com vegetação exuberante e raios de sol filtrando através das árvores.</p>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-img-wrapper" data-bs-toggle="modal" data-bs-target="#imageModal3">
+                    <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Praia Deserta">
+                    <div class="card-img-overlay">
+                        <h5 class="mb-1">Praia Deserta</h5>
+                        <p class="mb-0">Clique para expandir</p>
+                    </div>
+                    <div class="btn-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Praia Deserta</h5>
+                    <p class="card-text">Uma praia tranquila e deserta com águas cristalinas e areia branca, perfeita para relaxar.</p>
+                </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-img-wrapper" data-bs-toggle="modal" data-bs-target="#imageModal4">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Aurora Boreal">
+                    <div class="card-img-overlay">
+                        <h5 class="mb-1">Aurora Boreal</h5>
+                        <p class="mb-0">Clique para expandir</p>
+                    </div>
+                    <div class="btn-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Aurora Boreal</h5>
+                    <p class="card-text">O espetáculo das luzes do norte dançando no céu noturno em tons de verde e roxo.</p>
+                </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="card">
+                <div class="card-img-wrapper" data-bs-toggle="modal" data-bs-target="#imageModal5">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Cidade Noturna">
+                    <div class="card-img-overlay">
+                        <h5 class="mb-1">Cidade à Noite</h5>
+                        <p class="mb-0">Clique para expandir</p>
+                    </div>
+                    <div class="btn-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Cidade à Noite</h5>
+                    <p class="card-text">Arranha-céus iluminados criando um cenário urbano vibrante durante a noite.</p>
+                </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="card">
+                <div class="card-img-wrapper" data-bs-toggle="modal" data-bs-target="#imageModal6">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Cachoeira">
+                    <div class="card-img-overlay">
+                        <h5 class="mb-1">Cachoeira Majestosa</h5>
+                        <p class="mb-0">Clique para expandir</p>
+                    </div>
+                    <div class="btn-zoom">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Cachoeira Majestosa</h5>
+                    <p class="card-text">Uma impressionante cachoeira com água caindo de grande altura em meio a uma floresta.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Instruções -->
+        <div class="instructions">
+            <h4><i class="fas fa-info-circle me-2"></i>Como usar esta galeria</h4>
+            <p>Clique em qualquer uma das imagens acima para abri-la em uma janela modal maior. A janela modal exibirá a imagem em tamanho ampliado junto com uma descrição detalhada. Para fechar a modal, clique no botão "Fechar" ou em qualquer área fora da janela modal.</p>
+            <p class="mb-0">Esta implementação utiliza Bootstrap para a funcionalidade de modal e é totalmente responsiva, funcionando perfeitamente em dispositivos móveis e desktop.</p>
+        </div>
+        
+        <!-- Modal para a imagem 1 -->
+        <div class="modal fade" id="imageModal1" tabindex="-1" aria-labelledby="imageModalLabel1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel1">Montanhas ao Amanhecer</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Paisagem de Montanhas" class="img-fluid">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-title">Montanhas ao Amanhecer</div>
+                        <div class="image-description">
+                            Esta imagem captura a beleza serena das montanhas durante o nascer do sol. As cores vibrantes do céu refletem nas águas tranquilas, criando uma cena verdadeiramente inspiradora. A fotografia foi tirada na Cordilheira dos Alpes, mostrando a grandiosidade da natureza em sua forma mais pura.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Compartilhar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal para a imagem 2 -->
+        <div class="modal fade" id="imageModal2" tabindex="-1" aria-labelledby="imageModalLabel2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel2">Floresta Tropical</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Floresta Tropical" class="img-fluid">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-title">Floresta Tropical</div>
+                        <div class="image-description">
+                            Uma densa floresta tropical na Amazônia, onde a biodiversidade é uma das maiores do planeta. A imagem mostra a luz do sol filtrando através da copa das árvores, criando um efeito visual mágico. Esta fotografia destaca a importância da preservação destes ecossistemas vitais para o nosso planeta.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Compartilhar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal para a imagem 3 -->
+        <div class="modal fade" id="imageModal3" tabindex="-1" aria-labelledby="imageModalLabel3" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel3">Praia Deserta</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Praia Deserta" class="img-fluid">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-title">Praia Deserta</div>
+                        <div class="image-description">
+                            Esta imagem mostra uma praia paradisíaca e deserta com águas cristalinas em tons de azul turquesa. Localizada em uma ilha remota do Caribe, a praia oferece tranquilidade absoluta e beleza natural intocada. A areia branca e fina contrasta perfeitamente com o azul intenso do oceano.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Compartilhar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal para a imagem 4 -->
+        <div class="modal fade" id="imageModal4" tabindex="-1" aria-labelledby="imageModalLabel4" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel4">Aurora Boreal</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Aurora Boreal" class="img-fluid">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-title">Aurora Boreal</div>
+                        <div class="image-description">
+                            Um espetáculo de luzes naturais no céu noturno da Islândia. A aurora boreal, também conhecida como luzes do norte, é um fenômeno causado pela interação de partículas solares com o campo magnético da Terra. Esta fotografia capturou o momento em que as luzes dançam no céu em tons vibrantes de verde e roxo.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Compartilhar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal para a imagem 5 -->
+        <div class="modal fade" id="imageModal5" tabindex="-1" aria-labelledby="imageModalLabel5" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel5">Cidade à Noite</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cidade Noturna" class="img-fluid">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-title">Cidade à Noite</div>
+                        <div class="image-description">
+                            A vibrante vida noturna de uma metrópole moderna, com arranha-céus iluminados criando um cenário urbano impressionante. Esta fotografia foi tirada de um mirante alto, mostrando a extensão da cidade e o movimento constante de veículos nas ruas abaixo. As luzes refletem na água do rio que corta a cidade.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Compartilhar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal para a imagem 6 -->
+        <div class="modal fade" id="imageModal6" tabindex="-1" aria-labelledby="imageModalLabel6" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel6">Cachoeira Majestosa</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Cachoeira" class="img-fluid">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-title">Cachoeira Majestosa</div>
+                        <div class="image-description">
+                            Uma impressionante cachoeira com água caindo de grande altura em meio a uma floresta exuberante. Localizada no Parque Nacional de Yosemite, esta queda d'água é uma das mais fotografadas do mundo. A força da água combinada com a serenidade da floresta ao redor cria uma cena de poder e beleza naturais.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary">Compartilhar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Galeria de Imagens Interativa &copy; 2023 | Criado com Bootstrap 5</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Adicionar interatividade adicional
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adicionar evento de clique para os cards
+            const cards = document.querySelectorAll('.card-img-wrapper');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Adicionar efeito visual de clique
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // Melhorar a experiência do modal
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.addEventListener('shown.bs.modal', function() {
+                    // Adicionar foco no botão de fechar quando o modal abrir
+                    const closeButton = this.querySelector('.btn-secondary');
+                    if(closeButton) closeButton.focus();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
