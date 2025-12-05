@@ -401,6 +401,9 @@ body:has(.navbar-collapse.show) main{
         max-height: 290px;
         min-height: 290px;
         
+    }    
+    .gallery-container .image-card{
+        margin-bottom: 30px;
     }
 }
 @media (max-width: 991px){
@@ -477,6 +480,20 @@ body:has(.navbar-collapse.show) main{
         margin-top: 24px;
     }
 }
+@media (max-width: 569px){
+    .gallery-container .image-card{
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        max-width: 490px;
+        min-width: 450px;
+        margin-top: 24px;
+    }
+    .h3-title{
+        text-align: center;
+    }
+}
+
 @media (max-width: 350px){
     .footer-right{
         display: none;
