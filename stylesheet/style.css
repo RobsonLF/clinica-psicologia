@@ -98,6 +98,12 @@ body:has(.navbar-collapse.show) main{
     margin-bottom: 20px;
     color: var(--color-dark);
 }
+.h5-title{
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--color-dark);
+}
 .section-text{
     font-size: 1.1rem;
     color: #555;
@@ -193,6 +199,7 @@ body:has(.navbar-collapse.show) main{
     border: none;
     min-height: 220px; 
     max-width: 389px;
+    border-radius: 25px;
     
 }
 
@@ -205,7 +212,39 @@ body:has(.navbar-collapse.show) main{
     margin-bottom: 30px;
     line-height: 1.6;
 }
-
+/* ##############################################  Evidence Section ##########################################*/
+.star-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content-text-evidence{
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 30px;
+    font-style: italic;
+    
+    
+}
+.star-group{
+    /*margin-top: 10px;
+    margin-left: 6px;*/
+    display: flex;
+    gap: 1px;
+}
+.star{
+    
+    width: 28px;
+    height: 28px;
+    margin-left: 5px;
+    background-image: url(/images/star.png);
+    background-size:28px;
+}
+.google{
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
 
 /* ##############################################  Footer Section ##########################################*/
 .footer {
@@ -276,16 +315,7 @@ body:has(.navbar-collapse.show) main{
     margin-top: 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
+/* ##############################################  Media query ##########################################*/
 
 @media (max-width: 1399px){
     .about-image{
@@ -297,12 +327,23 @@ body:has(.navbar-collapse.show) main{
         max-width: 420px;
         min-width: 369px;
     }
+    .card-evidence{
+        max-height: 290px;
+        min-height: 290px;
+    }
 }
 
 @media (max-width: 1199px){
     .card{
         max-width: 300px;
         min-width: 309px;
+        max-height: 300px;
+        min-height: 250px;
+    }
+    .card-evidence{
+        max-height: 290px;
+        min-height: 290px;
+        
     }
 }
 @media (max-width: 991px){
@@ -348,6 +389,13 @@ body:has(.navbar-collapse.show) main{
         width: 100%;
     }
 
+    .card-evidence{       
+        max-height: 290px;
+        min-height: 290px;
+        margin-bottom: 30px;
+    }
+
+
     /*   
     .card{
         margin: 0 auto 15px auto;
@@ -368,7 +416,10 @@ body:has(.navbar-collapse.show) main{
         min-width: 380px;
         width: 100%;
     }
-    
+    .card-evidence{
+        max-height: 230px;
+        min-height: 230px;
+    }
 }
 
 @media (max-width: 350px){
