@@ -5,6 +5,8 @@
 
     --color-primary:#e6c7c7;
     --color-secondary:#eef3ef;
+    --color-tertiary:#f0e1e1f1;
+    /*--color-tertiary:#F8F0EC;*/
     /*--color-bg:#fafafa;*/
     --color-bg:#e0dcdc;
     --text-primary:#333333;
@@ -302,7 +304,72 @@ body:has(.navbar-collapse.show) main{
 .image-card:hover .image-overlay {
     opacity: 1;
 }
-        
+/* ##############################################  Location Section ##########################################*/
+.container-location{
+    background-color: var(--color-tertiary);
+    height: 350px;
+    width: 1275px;
+    padding: 0;
+    border-radius: 25px;
+}
+.location-map iframe{
+    width: 100%;
+    height: 350px;
+    padding: 0;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+.lmap{
+    padding: 0;
+}
+.ltext{
+    padding: 0;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    padding-top: 25px;
+    padding-left: 50px;
+}
+
+
+/*
+.location {
+    background-color: var(--color-bg);
+}
+.container-location{
+    padding: 0;
+}
+.location-map iframe {
+    width: 100%;
+    height: 400px; /* Ajuste a altura conforme necessário 
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px ;
+    
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    padding: 0;
+}
+
+.location-map iframe:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+.lmap{
+    padding: 0;
+    width: 625px;
+}
+.ltext{
+    width: 625px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: var(--color-tertiary);
+    padding:0px 0px 0px 0px;
+}
+.loc-title{
+    margin-bottom: 40px;
+}
+.l-tel{
+    margin-top: 25px;
+}
+*/
 /* ##############################################  Footer Section ##########################################*/
 .footer {
     background-color: var(--color-bg);
@@ -522,20 +589,4 @@ body:has(.navbar-collapse.show) main{
     }
 }
 
-/* ##############################################  Location Section ##########################################*/
-.location {
-    background-color: var(--color-bg);
-}
 
-.location-map iframe {
-    width: 100%;
-    height: 400px; /* Ajuste a altura conforme necessário */
-    border-radius: 15px;
-    border: 3px solid white;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-}
-
-.location-map iframe:hover {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-}
