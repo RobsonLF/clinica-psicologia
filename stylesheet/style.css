@@ -37,6 +37,9 @@ body{
     border-bottom: 1px solid var(--color-primary);
     height: 75px;
 }
+.navbar{
+    background-color: var(--color-bg)!important;
+}
 #icone{
     font-size: 32px;
     color: var(--color-primary);
