@@ -9,7 +9,6 @@
     --text-primary:#333333;
     --text-secondary:#8a8987;
     --icon-logo:#8a8987;
-
 }
 
 /* ##############################################  Config Global ##########################################*/
@@ -18,9 +17,52 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    font-family: "Inter", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-primary);   
+    background-color:var(--color-bg);
+}
 
 /* ##############################################  HEADER ##########################################*/
+.container-header{
+    border-bottom: 1px solid var(--color-primary);
+}
 .navbar{
     background-color:var(--color-bg)!important ;
-    
+    padding: 0;
+}
+#icone{
+    font-size: 32px;
+    color: var(--color-primary);
+    padding: 0 5px 0 0;
+}
+.navbar-brand{
+    font-size: 1.3rem;    
+    margin-left: 8px;
+}
+/* ##############################################  MAIN ##########################################*/
+.container-main{
+    margin-top: 65px;
+}
+
+/* ##############################################  MEDIA QUERY ##########################################*/
+@media(max-width:309px) {
+    .navbar-toggler{
+        display: none;
+    }
+    #icone{
+        display: none;
+    }
+}
+@media (min-width: 309px) and (max-width: 576px){ 
+
+}
+@media (min-width: 768){ 
+
+}
+@media (min-width: 992px){ 
+
+}
+@media (min-width: 1200px){ 
+
 }
