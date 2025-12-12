@@ -95,6 +95,13 @@ body{
     font-size: 1.3rem;    
     margin-left: 8px;
 }
+.nav-item{
+    font-weight: 500;
+    padding: 0 10px 0 10px
+}
+.nav-link:hover{
+    color: var(--color-primary);
+}
 /* ##############################################  MAIN ##########################################*/
 .container-main{
     margin-top: 65px;
@@ -123,6 +130,27 @@ body{
     object-position: center center; /* melhora o enquadramento (ajuste conforme necessário) */
     display: block;
 }
+/* ##############################################  ABOUT SECTION ##########################################*/
+.photo-frame-about{
+    width: 450px;
+    height: clamp(200px, 60vh, 250px);
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(12,18,22,0.08);
+    display: block;
+    flex-shrink: 0;
+    padding: 0;
+}
+.about-photo{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* mantém proporção e corta as bordas se necessário */
+    object-position: 50% 70%; /* melhora o enquadramento (ajuste conforme necessário) */
+}
+
 /* ##############################################  MEDIA QUERY ##########################################*/
 @media(max-width:309px) {
     .navbar-toggler{
