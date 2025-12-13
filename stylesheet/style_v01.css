@@ -142,6 +142,9 @@ body{
     flex-shrink: 0;
     padding: 0;
 }
+.ms-auto{
+    padding: 0;
+}
 .about-photo{
     display: flex;
     justify-content: center;
@@ -149,6 +152,9 @@ body{
     height: 100%;
     object-fit: cover; /* mantém proporção e corta as bordas se necessário */
     object-position: 50% 70%; /* melhora o enquadramento (ajuste conforme necessário) */
+}
+.conf_frame{
+    padding: 0;
 }
 
 /* ##############################################  MEDIA QUERY ##########################################*/
@@ -163,14 +169,12 @@ body{
         display: none;
     }
 }
-@media (min-width: 309px) and (max-width: 576px){ 
 
-}
 @media (min-width: 768){ 
 
 }
-@media (min-width: 992px){ 
-
+@media (max-width: 992px){ 
+    
 }
 @media (min-width: 1200px){ 
 
