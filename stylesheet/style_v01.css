@@ -156,7 +156,25 @@ body{
 .conf_frame{
     padding: 0;
 }
+/* ##############################################  ESPEC SECTION ##########################################*/
+.card-1{
+    padding-left: 0;
+}
+.card-2{
+    
+    padding-right: 0;
+}
 
+.card{
+    background-color: var(--color-secondary);
+    border: none;
+    border-radius: 20px;
+    min-height: 220px;
+    max-height: 250px;
+}
+.img-card{
+    width: 42px;
+}
 /* ##############################################  MEDIA QUERY ##########################################*/
 @media(max-width:309px) {
     .navbar-toggler{
@@ -174,7 +192,13 @@ body{
 
 }
 @media (max-width: 992px){ 
+    .card-1{
+    padding-left: 12px;
+    }
+    .card-2{
     
+    padding-right: 12px;
+    }
 }
 @media (min-width: 1200px){ 
 
