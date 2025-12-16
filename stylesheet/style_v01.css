@@ -161,10 +161,8 @@ body{
     padding-left: 0;
 }
 .card-2{
-    
     padding-right: 0;
 }
-
 .card{
     background-color: var(--color-secondary);
     border: none;
@@ -176,7 +174,40 @@ body{
     width: 42px;
 }
 /* ##############################################  TESTIMONIALS SECTION ##########################################*/
-
+.star-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.star-group{
+    display: flex;
+    gap: 1px;
+}
+.star{
+    width: 28px;
+    height: 28px;
+    margin-left: 5px;
+    background-image: url(/images/star.png);
+    background-size: 28px; 
+}
+.google{
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+.card-testemonials{
+    min-height: 250px;
+    border-radius: 10px;
+}
+.content-text-testemonials{
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+.card-user-info p{
+    line-height: 1.2;
+}
 
 /* ##############################################  MEDIA QUERY ##########################################*/
 @media(max-width:309px) {

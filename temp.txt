@@ -1,0 +1,70 @@
+        <!-- Depoimentos 
+        <div class="row align-items-center text-center text-xl-start">
+                <h2 class="h2-title">Depoimentos</h2>
+                <!--Card 1-->
+                <div class="col-lg-4 mb-3 card-1">
+                    <div class="card shadow-sm p-3 card-testemonials">
+                        <div class="star-row">
+                            <div class="star-group">
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                            </div>
+                            <img src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s48-fcrop64=1,00000000ffffffff-rw" alt="Google" class="google">
+                        </div>
+                        <div class="card-body">
+                            <p class="content-text-testemonials">"A Dra. Ana me ajudou a ver as coisas de uma prespectiva diferente. Sua abordagem gentil e compreensiva foi fundamental no meu processo. Sou muito grato."</p>
+                            <div class="card-user-info">
+                                <p class="h5-title">João S.</p>
+                                <p class="card-text">Paciente da Terapia Individual</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Card 2-->
+                <div class="col-lg-4 mb-3">
+                    <div class="card shadow-sm p-3 card-testemonials">
+                        <div class="star-row">
+                            <div class="star-group">
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                            </div>
+                            <img src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s48-fcrop64=1,00000000ffffffff-rw" alt="Google" class="google">
+                        </div>
+                        <div class="card-body">
+                            <p class="content-text-testemonials">"Encontrei na terapia um porto seguro. A Dra. Ana é uma profissional incrível, que me transmitiu muita confiança e me guiou com umuita sabedoria."</p>
+                            <div class="card-user-info">
+                                <p class="h5-title">Maria P.</p>
+                                <p class="card-text">Paciente da Terapia Individual</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Card 3-->
+                <div class="col-lg-4 mb-3 card-2">
+                    <div class="card shadow-sm p-3 card-testemonials">
+                        <div class="star-row">
+                            <div class="star-group">
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                                <div class="star"></div>
+                            </div>
+                            <img src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s48-fcrop64=1,00000000ffffffff-rw" alt="Google" class="google">
+                        </div>
+                        <div class="card-body">
+                            <p class="content-text-testemonials">"Nossas sessões de terapia de casal com a Dra. Ana, foram transformadoras. Aprendemos a nos comunicar melhor e a resolver nossos comflitos de forma saudável."</p>
+                            <div class="card-user-info">
+                                <p class="h5-title">Carlos e Lúcia.</p>
+                                <p class="card-text">Paciente da Terapia de Casal</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
