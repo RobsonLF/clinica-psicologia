@@ -131,18 +131,17 @@ body{
     display: block;
 }
 /* ##############################################  ABOUT SECTION ##########################################*/
+
 .photo-frame-about{
-    width: 450px;
+    
     height: clamp(200px, 60vh, 250px);
+    aspect-ratio: 3 / 4;
     border-radius: 20px;
     overflow: hidden;
     background: #fff;
     box-shadow: 0 12px 30px rgba(12,18,22,0.08);
     display: block;
     flex-shrink: 0;
-    padding: 0;
-}
-.ms-auto{
     padding: 0;
 }
 .about-photo{
@@ -152,9 +151,6 @@ body{
     height: 100%;
     object-fit: cover; /* mantém proporção e corta as bordas se necessário */
     object-position: 50% 70%; /* melhora o enquadramento (ajuste conforme necessário) */
-}
-.conf_frame{
-    padding: 0;
 }
 /* ##############################################  SPECIALIZATION SECTION ##########################################*/
 .card-1{
