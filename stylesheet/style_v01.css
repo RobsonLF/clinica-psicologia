@@ -208,7 +208,7 @@ body{
 .gallery-container{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 5px;
+    gap: 16px;
     padding: 0 0 30px 0;
     
 }
@@ -216,8 +216,9 @@ body{
     position: relative;
     overflow: hidden;
     height: 250px;
-    width: 288px;
-    padding: 0px 5px 0px 5px;
+    width: 100%;
+    min-width: 300px;
+    padding: 0px 0px 0px 0px;
     cursor: pointer;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
